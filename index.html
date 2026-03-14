@@ -1,1147 +1,1430 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MAISON VELL — Ready to Wear</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@100;200;300;400&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --cream: #F5F0E8;
-    --bone: #EDE7D9;
-    --charcoal: #1C1C1A;
-    --warm-black: #0E0D0B;
-    --sand: #C9B99A;
-    --rust: #A0522D;
-    --gold: #B8975A;
-    --mid: #6B6359;
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Max Rep Fitness Centre | Chennai</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700;900&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --black:   #0a0a0a;
+      --dark:    #111111;
+      --panel:   #181818;
+      --border:  #242424;
+      --fire:    #ff4d00;
+      --amber:   #ffab00;
+      --white:   #f5f0eb;
+      --muted:   #888;
+      --radius:  4px;
+    }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; }
 
-  body {
-    background: var(--cream);
-    color: var(--charcoal);
-    font-family: 'Josefin Sans', sans-serif;
-    font-weight: 200;
-    letter-spacing: 0.08em;
-    overflow-x: hidden;
-    cursor: none;
-  }
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Barlow', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
 
-  /* CUSTOM CURSOR */
-  .cursor {
-    width: 10px; height: 10px;
-    background: var(--charcoal);
-    border-radius: 50%;
-    position: fixed;
-    top: 0; left: 0;
-    pointer-events: none;
-    z-index: 9999;
-    transition: transform 0.15s ease, background 0.2s;
-    transform: translate(-50%, -50%);
-  }
-  .cursor-ring {
-    width: 38px; height: 38px;
-    border: 1px solid var(--charcoal);
-    border-radius: 50%;
-    position: fixed;
-    top: 0; left: 0;
-    pointer-events: none;
-    z-index: 9998;
-    transform: translate(-50%, -50%);
-    transition: all 0.35s cubic-bezier(.175,.885,.32,1.275);
-    opacity: 0.6;
-  }
-  body:has(a:hover) .cursor-ring,
-  body:has(button:hover) .cursor-ring { transform: translate(-50%, -50%) scale(2); opacity: 1; }
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 3rem;
+      background: rgba(10,10,10,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
 
-  /* NAV */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0;
-    z-index: 100;
-    padding: 28px 48px;
-    display: flex; align-items: center; justify-content: space-between;
-    mix-blend-mode: multiply;
-    background: transparent;
-    transition: background 0.4s;
-  }
-  nav.scrolled {
-    background: rgba(245,240,232,0.92);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(0,0,0,0.07);
-    mix-blend-mode: normal;
-    padding: 18px 48px;
-  }
-  .nav-logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 22px;
-    font-weight: 300;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    text-decoration: none;
-    color: var(--charcoal);
-  }
-  .nav-links {
-    display: flex; gap: 40px; list-style: none;
-  }
-  .nav-links a {
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    text-decoration: none;
-    color: var(--charcoal);
-    position: relative;
-    padding-bottom: 3px;
-  }
-  .nav-links a::after {
-    content: '';
-    position: absolute; bottom: 0; left: 0;
-    width: 0; height: 1px;
-    background: var(--charcoal);
-    transition: width 0.3s ease;
-  }
-  .nav-links a:hover::after { width: 100%; }
-  .nav-right { display: flex; gap: 24px; align-items: center; }
-  .nav-icon { font-size: 18px; cursor: pointer; opacity: 0.75; transition: opacity 0.2s; }
-  .nav-icon:hover { opacity: 1; }
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.9rem;
+      letter-spacing: 0.08em;
+      color: var(--white);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .nav-logo span { color: var(--fire); }
 
-  /* HERO */
-  .hero {
-    height: 100vh;
-    position: relative;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    overflow: hidden;
-  }
-  .hero-left {
-    background: var(--warm-black);
-    display: flex; flex-direction: column;
-    justify-content: flex-end;
-    padding: 80px 60px;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero-left::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='1' height='1' fill='%23ffffff08'/%3E%3C/svg%3E");
-    opacity: 0.5;
-  }
-  .hero-model {
-    position: absolute; inset: 0;
-    background: linear-gradient(160deg, #2a2520 0%, #0e0d0b 100%);
-    display: flex; align-items: center; justify-content: center;
-  }
-  .hero-model-figure {
-    width: 240px; height: 480px;
-    position: relative;
-    opacity: 0;
-    animation: fadeUp 1.2s ease 0.5s forwards;
-  }
-  /* SVG Silhouette */
-  .hero-model-figure svg {
-    width: 100%; height: 100%;
-    filter: drop-shadow(0 20px 60px rgba(0,0,0,0.8));
-  }
-  .hero-tag {
-    position: absolute; top: 48px; left: 60px;
-    font-size: 9px; letter-spacing: 0.35em;
-    text-transform: uppercase; color: var(--sand);
-    opacity: 0;
-    animation: fadeIn 1s ease 1s forwards;
-  }
-  .hero-copy { position: relative; z-index: 2; }
-  .hero-headline {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(60px, 7vw, 100px);
-    font-weight: 300;
-    line-height: 0.9;
-    color: var(--cream);
-    opacity: 0;
-    animation: fadeUp 1.2s ease 0.3s forwards;
-  }
-  .hero-headline em { font-style: italic; color: var(--gold); }
-  .hero-sub {
-    margin-top: 24px;
-    font-size: 10px; letter-spacing: 0.25em;
-    text-transform: uppercase; color: var(--sand);
-    opacity: 0;
-    animation: fadeUp 1.2s ease 0.6s forwards;
-  }
-  .hero-cta {
-    margin-top: 40px;
-    display: inline-block;
-    font-size: 10px; letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--cream);
-    text-decoration: none;
-    border: 1px solid rgba(255,255,255,0.3);
-    padding: 16px 32px;
-    position: relative;
-    overflow: hidden;
-    transition: color 0.3s;
-    opacity: 0;
-    animation: fadeUp 1.2s ease 0.9s forwards;
-  }
-  .hero-cta::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: var(--gold);
-    transform: translateX(-100%);
-    transition: transform 0.4s cubic-bezier(.77,0,.175,1);
-  }
-  .hero-cta:hover { color: var(--warm-black); }
-  .hero-cta:hover::before { transform: translateX(0); }
-  .hero-cta span { position: relative; z-index: 1; }
+    .nav-links {
+      display: flex;
+      gap: 2.4rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+      font-size: 0.85rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--fire); }
 
-  .hero-right {
-    background: var(--bone);
-    display: flex; flex-direction: column;
-    justify-content: center;
-    padding: 80px 60px;
-    gap: 32px;
-    position: relative;
-  }
-  .hero-right::after {
-    content: 'SS 25';
-    position: absolute; bottom: 48px; right: 60px;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 80px; font-weight: 300;
-    color: rgba(0,0,0,0.05);
-    line-height: 1;
-    pointer-events: none;
-  }
-  .featured-items {
-    display: flex; flex-direction: column; gap: 2px;
-    opacity: 0;
-    animation: fadeUp 1.2s ease 0.7s forwards;
-  }
-  .featured-item {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 18px 0;
-    border-bottom: 1px solid rgba(0,0,0,0.1);
-    text-decoration: none; color: var(--charcoal);
-    transition: padding-left 0.3s ease;
-  }
-  .featured-item:hover { padding-left: 8px; }
-  .fi-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 20px; font-weight: 300;
-  }
-  .fi-price {
-    font-size: 11px; letter-spacing: 0.15em;
-    color: var(--mid);
-  }
-  .fi-arrow { font-size: 18px; opacity: 0.4; transition: opacity 0.2s, transform 0.3s; }
-  .featured-item:hover .fi-arrow { opacity: 1; transform: translateX(4px); }
+    .nav-cta {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.82rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--black);
+      background: var(--fire);
+      border: none;
+      padding: 0.65rem 1.6rem;
+      border-radius: var(--radius);
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .nav-cta:hover { background: var(--amber); transform: translateY(-1px); }
 
-  /* MARQUEE */
-  .marquee-bar {
-    background: var(--charcoal);
-    padding: 14px 0;
-    overflow: hidden;
-    white-space: nowrap;
-  }
-  .marquee-track {
-    display: inline-flex; gap: 60px;
-    animation: marquee 18s linear infinite;
-    font-size: 9px; letter-spacing: 0.35em;
-    text-transform: uppercase; color: var(--sand);
-  }
-  .marquee-sep { color: var(--gold); }
+    /* hamburger */
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { width: 24px; height: 2px; background: var(--white); display: block; transition: 0.3s; }
 
-  /* COLLECTION GRID */
-  .section { padding: 100px 48px; }
-  .section-header {
-    display: flex; align-items: baseline; justify-content: space-between;
-    margin-bottom: 56px;
-    border-bottom: 1px solid rgba(0,0,0,0.12);
-    padding-bottom: 24px;
-  }
-  .section-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(36px, 4vw, 56px);
-    font-weight: 300;
-  }
-  .section-link {
-    font-size: 10px; letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--mid);
-    text-decoration: none;
-    border-bottom: 1px solid currentColor;
-    padding-bottom: 2px;
-    transition: color 0.2s;
-  }
-  .section-link:hover { color: var(--charcoal); }
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 3rem 5rem;
+      position: relative;
+      overflow: hidden;
+    }
 
-  .product-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 2px;
-  }
-  .product-card {
-    position: relative;
-    background: var(--bone);
-    aspect-ratio: 3/4;
-    overflow: hidden;
-    cursor: pointer;
-  }
-  .product-card:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 70% 40%, rgba(255,77,0,0.18) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 60% at 10% 80%, rgba(255,171,0,0.08) 0%, transparent 60%),
+        linear-gradient(160deg, #0a0a0a 40%, #1a0800 100%);
+    }
 
-  .product-bg {
-    position: absolute; inset: 0;
-    transition: transform 0.7s cubic-bezier(.25,.46,.45,.94);
-  }
-  .product-card:hover .product-bg { transform: scale(1.04); }
+    /* Animated grid lines */
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,77,0,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,77,0,0.05) 1px, transparent 1px);
+      background-size: 60px 60px;
+      animation: gridShift 20s linear infinite;
+    }
+    @keyframes gridShift {
+      from { background-position: 0 0; }
+      to   { background-position: 60px 60px; }
+    }
 
-  /* Product color fills */
-  .pc-1 { background: linear-gradient(145deg, #d4c5b0 0%, #b8a48e 100%); }
-  .pc-2 { background: linear-gradient(145deg, #2d2926 0%, #1a1714 100%); }
-  .pc-3 { background: linear-gradient(145deg, #8B7355 0%, #6B5740 100%); }
-  .pc-4 { background: linear-gradient(145deg, #e8ddd0 0%, #d5c9b8 100%); }
-  .pc-5 { background: linear-gradient(145deg, #3d3530 0%, #241f1b 100%); }
-  .pc-6 { background: linear-gradient(145deg, #c5b39a 0%, #a89278 100%); }
+    /* decorative diagonal bar */
+    .hero-slash {
+      position: absolute;
+      top: -20%;
+      right: -5%;
+      width: 3px;
+      height: 160%;
+      background: linear-gradient(180deg, transparent, var(--fire), transparent);
+      transform: rotate(-8deg);
+      opacity: 0.5;
+    }
+    .hero-slash-2 {
+      position: absolute;
+      top: -20%;
+      right: 6%;
+      width: 1px;
+      height: 160%;
+      background: linear-gradient(180deg, transparent, rgba(255,77,0,0.4), transparent);
+      transform: rotate(-8deg);
+    }
 
-  .product-figure {
-    position: absolute;
-    bottom: 0; left: 50%;
-    transform: translateX(-50%);
-    width: 70%;
-    display: flex; align-items: flex-end; justify-content: center;
-  }
+    .hero-eyebrow {
+      position: relative;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.78rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--fire);
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      animation: fadeUp 0.8s ease both;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 36px;
+      height: 2px;
+      background: var(--fire);
+    }
 
-  .product-info {
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    padding: 24px;
-    background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 100%);
-    transform: translateY(20px);
-    opacity: 0;
-    transition: all 0.4s ease;
-  }
-  .product-card:hover .product-info { opacity: 1; transform: translateY(0); }
+    .hero-title {
+      position: relative;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(5rem, 12vw, 13rem);
+      line-height: 0.88;
+      letter-spacing: 0.02em;
+      color: var(--white);
+      animation: fadeUp 0.8s 0.1s ease both;
+    }
+    .hero-title .accent { color: var(--fire); }
+    .hero-title .stroke {
+      -webkit-text-stroke: 2px var(--white);
+      color: transparent;
+    }
 
-  .product-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 20px; font-weight: 300;
-    color: white;
-    line-height: 1.2;
-  }
-  .product-detail {
-    margin-top: 4px;
-    font-size: 10px; letter-spacing: 0.2em;
-    text-transform: uppercase; color: rgba(255,255,255,0.7);
-    display: flex; justify-content: space-between; align-items: center;
-  }
-  .product-add {
-    width: 32px; height: 32px;
-    background: white;
-    color: var(--charcoal);
-    border: none; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 18px; cursor: pointer;
-    transition: transform 0.2s, background 0.2s;
-  }
-  .product-add:hover { background: var(--gold); color: white; transform: scale(1.1); }
-  .product-badge {
-    position: absolute; top: 16px; left: 16px;
-    font-size: 8px; letter-spacing: 0.25em;
-    text-transform: uppercase; color: white;
-    background: var(--rust);
-    padding: 4px 10px;
-  }
+    .hero-sub {
+      position: relative;
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 520px;
+      margin-top: 1.6rem;
+      line-height: 1.65;
+      animation: fadeUp 0.8s 0.2s ease both;
+    }
 
-  /* LOOKBOOK STRIP */
-  .lookbook {
-    padding: 0;
-    background: var(--warm-black);
-    overflow: hidden;
-  }
-  .lookbook-inner {
-    display: grid;
-    grid-template-columns: 1fr 1.2fr 1fr;
-    gap: 2px;
-  }
-  .look-panel {
-    aspect-ratio: 3/4;
-    position: relative;
-    overflow: hidden;
-  }
-  .look-panel:nth-child(2) { aspect-ratio: auto; }
-  .look-bg {
-    position: absolute; inset: 0;
-    transition: transform 0.8s cubic-bezier(.25,.46,.45,.94);
-  }
-  .look-panel:hover .look-bg { transform: scale(1.05); }
-  .lb-1 { background: linear-gradient(175deg, #3d3530 30%, #241f1b 100%); }
-  .lb-2 { background: linear-gradient(175deg, #c5b39a 20%, #8B7355 100%); }
-  .lb-3 { background: linear-gradient(175deg, #2d2926 30%, #1a1714 100%); }
+    .hero-actions {
+      position: relative;
+      display: flex;
+      gap: 1rem;
+      margin-top: 2.4rem;
+      animation: fadeUp 0.8s 0.3s ease both;
+    }
 
-  .look-overlay {
-    position: absolute; inset: 0;
-    display: flex; flex-direction: column;
-    justify-content: flex-end;
-    padding: 40px;
-  }
-  .look-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 80px; font-weight: 300;
-    color: rgba(255,255,255,0.08);
-    line-height: 1;
-    position: absolute; top: 24px; right: 32px;
-  }
-  .look-label {
-    font-size: 9px; letter-spacing: 0.35em;
-    text-transform: uppercase; color: var(--sand);
-    margin-bottom: 12px;
-  }
-  .look-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 28px; font-weight: 300;
-    color: white; line-height: 1.2;
-  }
+    .btn-primary {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.88rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--black);
+      background: var(--fire);
+      border: none;
+      padding: 1rem 2.4rem;
+      border-radius: var(--radius);
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    }
+    .btn-primary:hover {
+      background: var(--amber);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(255,77,0,0.4);
+    }
 
-  /* CENTER LOOKBOOK PANEL */
-  .look-center-content {
-    height: 100%;
-    display: flex; flex-direction: column;
-    justify-content: center; align-items: center;
-    padding: 80px 60px;
-    text-align: center;
-  }
-  .look-center-eyebrow {
-    font-size: 9px; letter-spacing: 0.4em;
-    text-transform: uppercase; color: var(--gold);
-    margin-bottom: 32px;
-  }
-  .look-center-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(48px, 5vw, 72px);
-    font-weight: 300; line-height: 1.05;
-    color: white;
-    margin-bottom: 32px;
-  }
-  .look-center-title em { font-style: italic; }
-  .look-center-body {
-    font-size: 11px; line-height: 1.9; letter-spacing: 0.08em;
-    color: rgba(255,255,255,0.5);
-    max-width: 320px; margin-bottom: 48px;
-  }
-  .btn-outline-light {
-    font-size: 10px; letter-spacing: 0.3em;
-    text-transform: uppercase; color: white;
-    text-decoration: none;
-    border: 1px solid rgba(255,255,255,0.3);
-    padding: 16px 36px;
-    position: relative; overflow: hidden;
-    transition: color 0.3s;
-  }
-  .btn-outline-light::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: var(--gold);
-    transform: scaleX(0); transform-origin: left;
-    transition: transform 0.4s cubic-bezier(.77,0,.175,1);
-  }
-  .btn-outline-light:hover { color: var(--warm-black); }
-  .btn-outline-light:hover::before { transform: scaleX(1); }
-  .btn-outline-light span { position: relative; z-index: 1; }
+    .btn-outline {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.88rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--white);
+      background: transparent;
+      border: 1.5px solid var(--border);
+      padding: 1rem 2.4rem;
+      border-radius: var(--radius);
+      cursor: pointer;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s, transform 0.15s;
+    }
+    .btn-outline:hover { border-color: var(--fire); color: var(--fire); transform: translateY(-2px); }
 
-  /* CATEGORIES */
-  .categories-section { background: var(--bone); }
-  .cat-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-  }
-  .cat-card {
-    position: relative;
-    padding: 40px;
-    border: 1px solid rgba(0,0,0,0.1);
-    text-decoration: none; color: var(--charcoal);
-    display: flex; flex-direction: column; gap: 16px;
-    transition: border-color 0.3s, transform 0.3s;
-    background: var(--cream);
-    overflow: hidden;
-  }
-  .cat-card::after {
-    content: '';
-    position: absolute; bottom: 0; left: 0; right: 0;
-    height: 2px;
-    background: var(--gold);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.4s cubic-bezier(.77,0,.175,1);
-  }
-  .cat-card:hover { transform: translateY(-4px); border-color: rgba(0,0,0,0.2); }
-  .cat-card:hover::after { transform: scaleX(1); }
-  .cat-icon { font-size: 28px; }
-  .cat-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 24px; font-weight: 300;
-  }
-  .cat-count { font-size: 10px; letter-spacing: 0.2em; color: var(--mid); }
-  .cat-arrow { position: absolute; right: 40px; bottom: 40px; font-size: 20px; opacity: 0.3; }
+    /* Hero stats strip */
+    .hero-stats {
+      position: absolute;
+      right: 3rem;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 2.4rem;
+      animation: fadeIn 1s 0.4s ease both;
+    }
+    .hero-stat { text-align: center; }
+    .hero-stat-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3rem;
+      color: var(--fire);
+      line-height: 1;
+    }
+    .hero-stat-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .stat-divider {
+      width: 1px;
+      height: 40px;
+      background: var(--border);
+      margin: 0 auto;
+    }
 
-  /* EDITORIAL STRIP */
-  .editorial {
-    padding: 100px 48px;
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 80px;
-    align-items: center;
-  }
-  .editorial-left { }
-  .editorial-eyebrow {
-    font-size: 9px; letter-spacing: 0.4em;
-    text-transform: uppercase; color: var(--gold);
-    margin-bottom: 24px;
-  }
-  .editorial-headline {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(42px, 4.5vw, 64px);
-    font-weight: 300; line-height: 1.05;
-    margin-bottom: 32px;
-  }
-  .editorial-body {
-    font-size: 11px; line-height: 2;
-    letter-spacing: 0.05em; color: var(--mid);
-    margin-bottom: 40px;
-  }
-  .editorial-right {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2px;
-  }
-  .editorial-img {
-    aspect-ratio: 3/4;
-    position: relative;
-    overflow: hidden;
-  }
-  .editorial-img:first-child { margin-top: 40px; }
-  .editorial-img-bg {
-    position: absolute; inset: 0;
-    transition: transform 0.7s cubic-bezier(.25,.46,.45,.94);
-  }
-  .editorial-img:hover .editorial-img-bg { transform: scale(1.05); }
-  .ei-1 { background: linear-gradient(155deg, #b8a48e 0%, #8B7355 100%); }
-  .ei-2 { background: linear-gradient(155deg, #3d3530 0%, #241f1b 100%); }
+    /* scroll cue */
+    .scroll-cue {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      animation: bounce 2s infinite;
+    }
+    .scroll-cue span {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .scroll-cue svg { color: var(--fire); }
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(6px); }
+    }
 
-  /* NEWSLETTER */
-  .newsletter {
-    background: var(--charcoal);
-    padding: 100px 48px;
-    text-align: center;
-    position: relative; overflow: hidden;
-  }
-  .newsletter::before {
-    content: 'SUBSCRIBE';
-    position: absolute;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(80px, 12vw, 160px);
-    font-weight: 300; letter-spacing: 0.1em;
-    color: rgba(255,255,255,0.03);
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    white-space: nowrap; pointer-events: none;
-  }
-  .newsletter-eyebrow {
-    font-size: 9px; letter-spacing: 0.4em;
-    text-transform: uppercase; color: var(--gold);
-    margin-bottom: 24px;
-  }
-  .newsletter-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(40px, 4vw, 60px);
-    font-weight: 300; color: white;
-    margin-bottom: 16px;
-  }
-  .newsletter-sub {
-    font-size: 11px; letter-spacing: 0.1em;
-    color: rgba(255,255,255,0.45);
-    margin-bottom: 48px;
-  }
-  .newsletter-form {
-    display: flex; gap: 0;
-    max-width: 520px; margin: 0 auto;
-  }
-  .newsletter-input {
-    flex: 1;
-    background: transparent;
-    border: 1px solid rgba(255,255,255,0.2);
-    border-right: none;
-    padding: 16px 24px;
-    font-family: 'Josefin Sans', sans-serif;
-    font-size: 11px; letter-spacing: 0.15em;
-    color: white; outline: none;
-    transition: border-color 0.3s;
-  }
-  .newsletter-input::placeholder { color: rgba(255,255,255,0.3); }
-  .newsletter-input:focus { border-color: var(--gold); }
-  .newsletter-btn {
-    background: var(--gold);
-    border: 1px solid var(--gold);
-    color: var(--warm-black);
-    padding: 16px 32px;
-    font-family: 'Josefin Sans', sans-serif;
-    font-size: 10px; letter-spacing: 0.3em;
-    text-transform: uppercase; cursor: pointer;
-    transition: background 0.3s, color 0.3s;
-  }
-  .newsletter-btn:hover { background: white; border-color: white; }
+    /* ── TICKER ── */
+    .ticker {
+      background: var(--fire);
+      padding: 0.6rem 0;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .ticker-inner {
+      display: inline-block;
+      animation: tick 24s linear infinite;
+    }
+    .ticker-item {
+      display: inline-block;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1rem;
+      letter-spacing: 0.1em;
+      color: var(--black);
+      padding: 0 2rem;
+    }
+    .ticker-item::after {
+      content: '●';
+      margin-left: 2rem;
+      font-size: 0.5rem;
+      vertical-align: middle;
+    }
+    @keyframes tick {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
 
-  /* FOOTER */
-  footer {
-    background: var(--warm-black);
-    padding: 72px 48px 40px;
-    color: rgba(255,255,255,0.5);
-  }
-  .footer-top {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr;
-    gap: 48px;
-    padding-bottom: 56px;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-    margin-bottom: 40px;
-  }
-  .footer-brand {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 28px; font-weight: 300;
-    letter-spacing: 0.3em; color: white;
-    text-transform: uppercase; margin-bottom: 20px;
-  }
-  .footer-tagline {
-    font-size: 11px; line-height: 1.9;
-    letter-spacing: 0.05em; max-width: 260px;
-  }
-  .footer-col-title {
-    font-size: 9px; letter-spacing: 0.3em;
-    text-transform: uppercase; color: var(--gold);
-    margin-bottom: 20px;
-  }
-  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 12px; }
-  .footer-links a {
-    font-size: 11px; letter-spacing: 0.1em;
-    color: rgba(255,255,255,0.45);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-  .footer-links a:hover { color: white; }
-  .footer-bottom {
-    display: flex; justify-content: space-between; align-items: center;
-    font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
-    color: rgba(255,255,255,0.25);
-  }
-  .social-links { display: flex; gap: 24px; }
-  .social-links a { color: rgba(255,255,255,0.3); text-decoration: none; font-size: 14px; transition: color 0.2s; }
-  .social-links a:hover { color: var(--gold); }
+    /* ── SECTIONS COMMON ── */
+    section { padding: 6rem 3rem; }
 
-  /* ANIMATIONS */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-  @keyframes marquee {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-  }
+    .section-eyebrow {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--fire);
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      margin-bottom: 1rem;
+    }
+    .section-eyebrow::before {
+      content: '';
+      display: block;
+      width: 28px;
+      height: 2px;
+      background: var(--fire);
+    }
 
-  /* SCROLL REVEAL */
-  .reveal {
-    opacity: 0; transform: translateY(40px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-  }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.8rem, 5vw, 5rem);
+      line-height: 0.92;
+      letter-spacing: 0.02em;
+    }
 
-  /* Cart indicator */
-  .cart-count {
-    display: inline-flex; align-items: center; justify-content: center;
-    width: 16px; height: 16px;
-    background: var(--rust); color: white;
-    border-radius: 50%; font-size: 8px;
-    position: relative; top: -8px; left: -4px;
-  }
-</style>
+    /* ── ABOUT ── */
+    #about {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .about-visual {
+      position: relative;
+    }
+    .about-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2.4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .about-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--fire), var(--amber));
+    }
+
+    .big-letter {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 10rem;
+      line-height: 1;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(255,77,0,0.3);
+      position: absolute;
+      bottom: -1rem;
+      right: 1rem;
+      pointer-events: none;
+    }
+
+    .about-feature-list {
+      list-style: none;
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .about-feature-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.9rem;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+    .feature-icon {
+      width: 22px;
+      height: 22px;
+      min-width: 22px;
+      background: rgba(255,77,0,0.15);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 1px;
+    }
+    .feature-icon svg { width: 12px; height: 12px; color: var(--fire); }
+
+    .about-badge {
+      position: absolute;
+      bottom: -1.5rem;
+      right: -1.5rem;
+      width: 120px;
+      height: 120px;
+      background: var(--fire);
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 1rem;
+      animation: spin-slow 12s linear infinite;
+    }
+    @keyframes spin-slow { to { transform: rotate(360deg); } }
+    .badge-inner { animation: spin-slow 12s linear infinite reverse; }
+    .badge-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.2rem;
+      color: var(--black);
+      line-height: 1;
+    }
+    .badge-text {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.55rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--black);
+    }
+
+    .about-body { font-size: 1rem; line-height: 1.75; color: var(--muted); }
+    .about-body strong { color: var(--white); font-weight: 500; }
+    .about-body p + p { margin-top: 1.2rem; }
+
+    /* ── SERVICES ── */
+    #services { background: var(--dark); }
+    #services .section-header { margin-bottom: 3.5rem; }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .service-card {
+      background: var(--panel);
+      padding: 2.4rem;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s;
+      cursor: default;
+    }
+    .service-card:hover { background: #1e1e1e; }
+    .service-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 0;
+      background: var(--fire);
+      transition: height 0.3s;
+    }
+    .service-card:hover::after { height: 2px; }
+
+    .service-icon {
+      font-size: 2rem;
+      margin-bottom: 1.2rem;
+    }
+    .service-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1.4rem;
+      letter-spacing: 0.02em;
+      margin-bottom: 0.6rem;
+    }
+    .service-desc {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .service-bg-num {
+      position: absolute;
+      bottom: -1rem;
+      right: 1rem;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 6rem;
+      color: rgba(255,255,255,0.03);
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    /* ── HOURS & LOCATION ── */
+    #visit {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .info-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .info-card-header {
+      padding: 1.5rem 2rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .info-card-header h3 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .info-card-body { padding: 2rem; }
+
+    .open-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(34,197,94,0.12);
+      border: 1px solid rgba(34,197,94,0.3);
+      color: #4ade80;
+      padding: 0.25rem 0.75rem;
+      border-radius: 99px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 1.4rem;
+    }
+    .open-badge::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      background: #4ade80;
+      border-radius: 50%;
+      animation: pulse-green 2s infinite;
+    }
+    @keyframes pulse-green {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .hours-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      font-size: 0.9rem;
+    }
+    .hours-row:last-child { border-bottom: none; }
+    .hours-day { color: var(--muted); font-size: 0.85rem; }
+    .hours-time { font-weight: 500; font-size: 0.9rem; }
+    .hours-time.highlight { color: var(--fire); }
+
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1.4rem;
+    }
+    .contact-item:last-child { margin-bottom: 0; }
+    .contact-icon {
+      width: 38px;
+      height: 38px;
+      min-width: 38px;
+      background: rgba(255,77,0,0.1);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .contact-icon svg { width: 18px; height: 18px; color: var(--fire); }
+    .contact-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.25rem;
+    }
+    .contact-value {
+      font-size: 0.95rem;
+      font-weight: 400;
+      line-height: 1.4;
+      color: var(--white);
+    }
+    .contact-value a { color: var(--fire); text-decoration: none; }
+    .contact-value a:hover { text-decoration: underline; }
+
+    /* map placeholder */
+    .map-embed {
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      height: 220px;
+      background: var(--panel);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 1.5rem;
+      position: relative;
+    }
+    .map-embed iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      filter: invert(90%) hue-rotate(180deg) saturate(0.6);
+    }
+
+    /* ── MEMBERSHIP ── */
+    #membership { background: var(--dark); }
+    .plans-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 3.5rem;
+    }
+
+    .plan-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2.5rem 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .plan-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.4);
+    }
+    .plan-card.featured {
+      border-color: var(--fire);
+      background: #180d00;
+    }
+    .plan-card.featured::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--fire), var(--amber));
+    }
+
+    .plan-badge {
+      position: absolute;
+      top: 1.2rem; right: 1.2rem;
+      background: var(--fire);
+      color: var(--black);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.6rem;
+      border-radius: 99px;
+    }
+
+    .plan-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+    .plan-price {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3.5rem;
+      color: var(--white);
+      line-height: 1;
+    }
+    .plan-price span {
+      font-family: 'Barlow', sans-serif;
+      font-size: 1rem;
+      font-weight: 300;
+      color: var(--muted);
+    }
+    .plan-period {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 2rem;
+    }
+    .plan-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      margin-bottom: 2rem;
+    }
+    .plan-features li {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.88rem;
+    }
+    .plan-features li.off { color: var(--muted); }
+    .check { color: var(--fire); font-size: 1rem; }
+    .cross { color: #444; font-size: 1rem; }
+
+    .plan-btn {
+      display: block;
+      text-align: center;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.85rem;
+      border-radius: var(--radius);
+      text-decoration: none;
+      transition: 0.2s;
+    }
+    .plan-btn.solid {
+      background: var(--fire);
+      color: var(--black);
+    }
+    .plan-btn.solid:hover { background: var(--amber); }
+    .plan-btn.ghost {
+      border: 1.5px solid var(--border);
+      color: var(--white);
+    }
+    .plan-btn.ghost:hover { border-color: var(--fire); color: var(--fire); }
+
+    /* ── TESTIMONIALS ── */
+    #testimonials .section-header { margin-bottom: 3.5rem; }
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .review-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2rem;
+    }
+    .stars { color: var(--amber); font-size: 0.85rem; letter-spacing: 2px; margin-bottom: 1rem; }
+    .review-text {
+      font-size: 0.92rem;
+      line-height: 1.7;
+      color: var(--muted);
+      margin-bottom: 1.4rem;
+    }
+    .review-author {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--fire), var(--amber));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.1rem;
+      color: var(--black);
+    }
+    .author-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
+    }
+    .author-tag {
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    /* ── CTA BANNER ── */
+    #cta {
+      background: linear-gradient(135deg, var(--fire) 0%, #cc2900 100%);
+      padding: 5rem 3rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    #cta::before {
+      content: 'MAX REP';
+      position: absolute;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 16rem;
+      color: rgba(0,0,0,0.12);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      white-space: nowrap;
+      letter-spacing: 0.05em;
+      pointer-events: none;
+    }
+    #cta .section-title { color: var(--black); }
+    #cta .section-eyebrow { color: rgba(0,0,0,0.6); justify-content: center; }
+    #cta .section-eyebrow::before { background: rgba(0,0,0,0.4); }
+    #cta p { color: rgba(0,0,0,0.7); margin: 1rem 0 2.5rem; font-size: 1.05rem; }
+    .cta-btn {
+      display: inline-block;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--fire);
+      background: var(--black);
+      border: none;
+      padding: 1rem 2.8rem;
+      border-radius: var(--radius);
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--black);
+      border-top: 1px solid var(--border);
+      padding: 3rem;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 3rem;
+    }
+    .footer-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      letter-spacing: 0.08em;
+      color: var(--white);
+      margin-bottom: 0.8rem;
+    }
+    .footer-logo span { color: var(--fire); }
+    .footer-tagline {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 280px;
+    }
+    .footer-col h4 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--fire);
+      margin-bottom: 1.2rem;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li + li { margin-top: 0.6rem; }
+    .footer-col ul a {
+      font-size: 0.88rem;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-col ul a:hover { color: var(--white); }
+    .footer-bottom {
+      border-top: 1px solid var(--border);
+      padding: 1.5rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+    .footer-fire { color: var(--fire); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      #about, #visit { grid-template-columns: 1fr; gap: 2.5rem; }
+      .services-grid, .plans-grid, .reviews-grid { grid-template-columns: 1fr 1fr; }
+      .hero-stats { display: none; }
+      footer { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      #hero { padding: 0 1.5rem 4rem; }
+      section { padding: 4rem 1.5rem; }
+      .services-grid, .plans-grid, .reviews-grid { grid-template-columns: 1fr; }
+      footer { grid-template-columns: 1fr; padding: 2rem 1.5rem; }
+      .footer-bottom { padding: 1rem 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+  </style>
 </head>
 <body>
 
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursorRing"></div>
-
 <!-- NAV -->
-<nav id="mainNav">
-  <a href="#" class="nav-logo">Maison Vell</a>
+<nav>
+  <a href="#" class="nav-logo">MAX<span>REP</span></a>
   <ul class="nav-links">
-    <li><a href="#collection">Collection</a></li>
-    <li><a href="#lookbook">Lookbook</a></li>
-    <li><a href="#editorial">About</a></li>
-    <li><a href="#categories">Categories</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#membership">Membership</a></li>
+    <li><a href="#visit">Visit</a></li>
   </ul>
-  <div class="nav-right">
-    <span class="nav-icon">⌕</span>
-    <span class="nav-icon">♡</span>
-    <span class="nav-icon">◻<span class="cart-count">2</span></span>
+  <a href="tel:09171678861" class="nav-cta">Call Now</a>
+  <div class="hamburger" onclick="this.classList.toggle('open')">
+    <span></span><span></span><span></span>
   </div>
 </nav>
 
 <!-- HERO -->
-<section class="hero">
-  <div class="hero-left">
-    <div class="hero-model">
-      <div class="hero-model-figure">
-        <!-- Fashion silhouette SVG -->
-        <svg viewBox="0 0 240 480" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- Head -->
-          <ellipse cx="120" cy="38" rx="26" ry="30" fill="#c9b99a" opacity="0.9"/>
-          <!-- Hair -->
-          <path d="M94 30 Q96 12 120 10 Q144 12 146 30 Q140 8 120 8 Q100 8 94 30Z" fill="#8B6914" opacity="0.8"/>
-          <!-- Neck -->
-          <rect x="112" y="64" width="16" height="18" rx="4" fill="#c9b99a" opacity="0.9"/>
-          <!-- Coat/jacket body -->
-          <path d="M72 82 Q80 75 112 78 L120 80 L128 78 Q160 75 168 82 L178 160 Q160 165 120 164 Q80 165 62 160 Z" fill="#3d3530" opacity="0.95"/>
-          <!-- Lapels -->
-          <path d="M112 78 L108 120 L120 110 L132 120 L128 78" fill="#241f1b" opacity="0.9"/>
-          <!-- Belt -->
-          <rect x="68" y="158" width="104" height="8" rx="1" fill="#8B6914" opacity="0.9"/>
-          <!-- Skirt/trousers -->
-          <path d="M70 166 Q75 260 72 340 L92 341 Q95 270 100 220 Q110 260 108 340 L132 341 Q130 260 140 220 Q145 270 148 341 L168 340 Q165 260 170 166 Z" fill="#2d2926" opacity="0.95"/>
-          <!-- Shoes -->
-          <path d="M74 340 L90 340 L94 358 L78 360 L72 354 Z" fill="#1a1714"/>
-          <path d="M150 340 L166 340 L162 358 L146 360 L148 354 Z" fill="#1a1714"/>
-          <!-- Collar detail -->
-          <line x1="108" y1="80" x2="102" y2="100" stroke="#c9b99a" stroke-width="1" opacity="0.3"/>
-          <line x1="132" y1="80" x2="138" y2="100" stroke="#c9b99a" stroke-width="1" opacity="0.3"/>
-        </svg>
-      </div>
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-slash"></div>
+  <div class="hero-slash-2"></div>
+
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="hero-stat-num">500+</div>
+      <div class="hero-stat-label">Members</div>
     </div>
-    <div class="hero-tag">Spring / Summer 2025 Collection</div>
-    <div class="hero-copy">
-      <h1 class="hero-headline">Dressed<br>in <em>silence</em></h1>
-      <p class="hero-sub">Womenswear · Menswear · Accessories</p>
-      <a href="#collection" class="hero-cta"><span>Explore Collection →</span></a>
+    <div class="stat-divider"></div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">10+</div>
+      <div class="hero-stat-label">Expert Trainers</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">15h</div>
+      <div class="hero-stat-label">Open Daily</div>
     </div>
   </div>
-  <div class="hero-right">
-    <div class="featured-items">
-      <div style="font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:var(--mid);margin-bottom:8px;">Featured Pieces</div>
-      <a href="#" class="featured-item">
-        <span class="fi-name">Structured Overcoat</span>
-        <span style="display:flex;align-items:center;gap:16px">
-          <span class="fi-price">£ 1,240</span>
-          <span class="fi-arrow">→</span>
-        </span>
-      </a>
-      <a href="#" class="featured-item">
-        <span class="fi-name">Silk Slip Dress</span>
-        <span style="display:flex;align-items:center;gap:16px">
-          <span class="fi-price">£ 680</span>
-          <span class="fi-arrow">→</span>
-        </span>
-      </a>
-      <a href="#" class="featured-item">
-        <span class="fi-name">Tailored Trousers</span>
-        <span style="display:flex;align-items:center;gap:16px">
-          <span class="fi-price">£ 420</span>
-          <span class="fi-arrow">→</span>
-        </span>
-      </a>
-      <a href="#" class="featured-item">
-        <span class="fi-name">Cashmere Knit</span>
-        <span style="display:flex;align-items:center;gap:16px">
-          <span class="fi-price">£ 560</span>
-          <span class="fi-arrow">→</span>
-        </span>
-      </a>
-      <a href="#" class="featured-item">
-        <span class="fi-name">Leather Crossbody</span>
-        <span style="display:flex;align-items:center;gap:16px">
-          <span class="fi-price">£ 890</span>
-          <span class="fi-arrow">→</span>
-        </span>
-      </a>
-    </div>
+
+  <div class="hero-eyebrow">No. 27, Poonamallee High Rd · Arumbakkam, Chennai</div>
+  <div class="hero-title">
+    MAX<br>
+    <span class="accent">REP</span><br>
+    <span class="stroke">FITNESS</span>
+  </div>
+  <p class="hero-sub">
+    Where Chennai's strongest train. Push past your limits every single day — with elite equipment, expert coaches, and a community that refuses to quit.
+  </p>
+  <div class="hero-actions">
+    <a href="#membership" class="btn-primary">Start Training</a>
+    <a href="#visit" class="btn-outline">Find Us</a>
+  </div>
+
+  <div class="scroll-cue">
+    <span>Scroll</span>
+    <svg width="16" height="20" viewBox="0 0 16 20" fill="none">
+      <path d="M8 2v16M2 13l6 6 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>
   </div>
 </section>
 
-<!-- MARQUEE -->
-<div class="marquee-bar">
-  <div class="marquee-track">
-    <span>New Collection</span><span class="marquee-sep">✦</span>
-    <span>Free shipping over £250</span><span class="marquee-sep">✦</span>
-    <span>Spring Summer 2025</span><span class="marquee-sep">✦</span>
-    <span>Sustainable Materials</span><span class="marquee-sep">✦</span>
-    <span>Made in Italy</span><span class="marquee-sep">✦</span>
-    <span>New Collection</span><span class="marquee-sep">✦</span>
-    <span>Free shipping over £250</span><span class="marquee-sep">✦</span>
-    <span>Spring Summer 2025</span><span class="marquee-sep">✦</span>
-    <span>Sustainable Materials</span><span class="marquee-sep">✦</span>
-    <span>Made in Italy</span><span class="marquee-sep">✦</span>
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-item">Strength Training</span>
+    <span class="ticker-item">Personal Coaching</span>
+    <span class="ticker-item">Cardio Zone</span>
+    <span class="ticker-item">Functional Fitness</span>
+    <span class="ticker-item">CrossFit</span>
+    <span class="ticker-item">Yoga & Stretching</span>
+    <span class="ticker-item">Nutrition Guidance</span>
+    <span class="ticker-item">Open Until 11 PM</span>
+    <span class="ticker-item">Strength Training</span>
+    <span class="ticker-item">Personal Coaching</span>
+    <span class="ticker-item">Cardio Zone</span>
+    <span class="ticker-item">Functional Fitness</span>
+    <span class="ticker-item">CrossFit</span>
+    <span class="ticker-item">Yoga & Stretching</span>
+    <span class="ticker-item">Nutrition Guidance</span>
+    <span class="ticker-item">Open Until 11 PM</span>
   </div>
 </div>
 
-<!-- COLLECTION -->
-<section class="section" id="collection">
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-visual reveal">
+    <div class="about-card">
+      <div class="big-letter">MR</div>
+      <div class="section-eyebrow">Est. in Chennai</div>
+      <div class="section-title">Built for <span style="color:var(--fire)">Results.</span></div>
+      <ul class="about-feature-list">
+        <li>
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M5 12l5 5L20 7"/>
+            </svg>
+          </div>
+          Premium equipment — barbells, racks, cables, and more
+        </li>
+        <li>
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M5 12l5 5L20 7"/>
+            </svg>
+          </div>
+          Certified personal trainers with proven programming
+        </li>
+        <li>
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M5 12l5 5L20 7"/>
+            </svg>
+          </div>
+          Spacious, air-conditioned training floor
+        </li>
+        <li>
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M5 12l5 5L20 7"/>
+            </svg>
+          </div>
+          Dedicated cardio, stretching & functional zones
+        </li>
+        <li>
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M5 12l5 5L20 7"/>
+            </svg>
+          </div>
+          Open from early morning until 11 PM every day
+        </li>
+      </ul>
+      <div class="about-badge">
+        <div class="badge-inner">
+          <div class="badge-num">15h</div>
+          <div class="badge-text">Daily Open Hours</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="reveal" style="transition-delay: 0.15s">
+    <div class="section-eyebrow">About Us</div>
+    <h2 class="section-title" style="margin-bottom:1.5rem">Your Strongest Self <span style="color:var(--fire)">Starts Here</span></h2>
+    <div class="about-body">
+      <p>
+        <strong>Max Rep Fitness Centre</strong> is Chennai's destination for serious training. Located in the heart of Arumbakkam, we're easily accessible from across the city and built with one purpose: helping you hit your max every session.
+      </p>
+      <p>
+        Whether you're a <strong>beginner taking your first steps</strong> or an experienced athlete pushing your ceiling, our coaches meet you where you are and take you further. We believe in training that's smart, structured, and relentlessly progressive.
+      </p>
+      <p>
+        Walk in. Sweat hard. Leave better than you arrived. That's the Max Rep way.
+      </p>
+    </div>
+    <div style="display:flex; gap:2rem; margin-top:2.5rem;">
+      <div>
+        <div style="font-family:'Bebas Neue',sans-serif; font-size:3rem; color:var(--fire); line-height:1;">500+</div>
+        <div style="font-size:0.82rem; color:var(--muted); font-family:'Barlow Condensed',sans-serif; font-weight:600; letter-spacing:0.12em; text-transform:uppercase;">Active Members</div>
+      </div>
+      <div>
+        <div style="font-family:'Bebas Neue',sans-serif; font-size:3rem; color:var(--fire); line-height:1;">10+</div>
+        <div style="font-size:0.82rem; color:var(--muted); font-family:'Barlow Condensed',sans-serif; font-weight:600; letter-spacing:0.12em; text-transform:uppercase;">Expert Coaches</div>
+      </div>
+      <div>
+        <div style="font-family:'Bebas Neue',sans-serif; font-size:3rem; color:var(--fire); line-height:1;">∞</div>
+        <div style="font-size:0.82rem; color:var(--muted); font-family:'Barlow Condensed',sans-serif; font-weight:600; letter-spacing:0.12em; text-transform:uppercase;">Gains to Chase</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
   <div class="section-header reveal">
-    <h2 class="section-title">New Arrivals</h2>
-    <a href="#" class="section-link">View All Pieces</a>
+    <div class="section-eyebrow">What We Offer</div>
+    <h2 class="section-title">Everything You Need to <span style="color:var(--fire)">Train Harder</span></h2>
   </div>
-  <div class="product-grid reveal">
-
-    <div class="product-card">
-      <div class="product-bg pc-1"></div>
-      <!-- Garment illustration -->
-      <div class="product-figure" style="height:80%">
-        <svg viewBox="0 0 200 360" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-          <path d="M60 60 Q70 40 100 38 Q130 40 140 60 L155 160 Q120 170 100 170 Q80 170 45 160 Z" fill="#8B7355" opacity="0.9"/>
-          <path d="M45 160 Q48 260 46 340 L80 341 L82 230 L100 280 L118 230 L120 341 L154 340 Q152 260 155 160 Z" fill="#6B5740" opacity="0.95"/>
-          <path d="M60 60 L40 120 L55 125 L70 70Z" fill="#7a6448"/>
-          <path d="M140 60 L160 120 L145 125 L130 70Z" fill="#7a6448"/>
-          <rect x="46" y="156" width="108" height="6" rx="1" fill="#b8975a" opacity="0.8"/>
-        </svg>
-      </div>
-      <div class="product-badge">New</div>
-      <div class="product-info">
-        <div class="product-name">Camel Wool Coat</div>
-        <div class="product-detail">
-          <span>£ 1,680</span>
-          <button class="product-add" onclick="addToCart(this)">+</button>
-        </div>
-      </div>
+  <div class="services-grid reveal" style="transition-delay:0.1s">
+    <div class="service-card">
+      <div class="service-icon">🏋️</div>
+      <div class="service-name">Strength & Weightlifting</div>
+      <div class="service-desc">Full power racks, Olympic bars, dumbbells up to 60 kg, and plate-loaded machines. Built to get you strong.</div>
+      <div class="service-bg-num">01</div>
     </div>
-
-    <div class="product-card">
-      <div class="product-bg pc-2"></div>
-      <div class="product-figure" style="height:75%">
-        <svg viewBox="0 0 180 320" fill="none" style="width:85%;height:100%">
-          <path d="M55 50 Q65 30 90 28 Q115 30 125 50 L138 130 Q108 138 90 138 Q72 138 42 130 Z" fill="#4a3f38" opacity="0.9"/>
-          <path d="M42 130 Q44 210 42 290 L68 291 L70 200 L90 240 L110 200 L112 291 L138 290 Q136 210 138 130 Z" fill="#3d3530" opacity="0.95"/>
-          <path d="M55 50 L34 100 L48 105 L62 58Z" fill="#3d3530"/>
-          <path d="M125 50 L146 100 L132 105 L118 58Z" fill="#3d3530"/>
-        </svg>
-      </div>
-      <div class="product-info">
-        <div class="product-name">Midnight Blazer</div>
-        <div class="product-detail">
-          <span>£ 890</span>
-          <button class="product-add" onclick="addToCart(this)">+</button>
-        </div>
-      </div>
+    <div class="service-card">
+      <div class="service-icon">🏃</div>
+      <div class="service-name">Cardio Zone</div>
+      <div class="service-desc">Treadmills, ellipticals, assault bikes, and rowing machines for every endurance goal from fat loss to marathon prep.</div>
+      <div class="service-bg-num">02</div>
     </div>
-
-    <div class="product-card">
-      <div class="product-bg pc-3"></div>
-      <div class="product-figure" style="height:75%">
-        <svg viewBox="0 0 180 320" fill="none" style="width:85%;height:100%">
-          <path d="M65 30 Q90 10 115 30 L125 80 L90 90 L55 80 Z" fill="#c9a87a" opacity="0.9"/>
-          <path d="M55 80 Q50 200 52 290 L76 291 L78 190 L90 230 L102 190 L104 291 L128 290 Q130 200 125 80 Z" fill="#b8975a" opacity="0.95"/>
-          <path d="M65 30 L46 85 L58 88 L68 38Z" fill="#a0804a"/>
-          <path d="M115 30 L134 85 L122 88 L112 38Z" fill="#a0804a"/>
-        </svg>
-      </div>
-      <div class="product-badge" style="background:var(--gold);color:var(--charcoal)">Low Stock</div>
-      <div class="product-info">
-        <div class="product-name">Tan Linen Suit</div>
-        <div class="product-detail">
-          <span>£ 1,120</span>
-          <button class="product-add" onclick="addToCart(this)">+</button>
-        </div>
-      </div>
+    <div class="service-card">
+      <div class="service-icon">🧑‍🏫</div>
+      <div class="service-name">Personal Training</div>
+      <div class="service-desc">One-on-one coaching with certified trainers who build programs around your goals, schedule, and lifestyle.</div>
+      <div class="service-bg-num">03</div>
     </div>
-
-    <div class="product-card">
-      <div class="product-bg pc-4"></div>
-      <div class="product-figure" style="height:75%">
-        <svg viewBox="0 0 180 320" fill="none" style="width:85%;height:100%">
-          <!-- Dress silhouette -->
-          <path d="M60 20 Q90 8 120 20 L128 70 Q108 80 90 80 Q72 80 52 70 Z" fill="#d0c4b4" opacity="0.9"/>
-          <path d="M52 70 Q46 180 50 290 L130 290 Q134 180 128 70 Z" fill="#c5b7a5" opacity="0.95" style="clip-path:polygon(0 0, 100% 0, 110% 100%, -10% 100%)"/>
-          <path d="M52 70 L130 70 Q145 160 150 290 L30 290 Q35 160 52 70Z" fill="#c5b7a5" opacity="0.95"/>
-          <path d="M60 20 L36 65 L50 68 L64 28Z" fill="#b8a898"/>
-          <path d="M120 20 L144 65 L130 68 L116 28Z" fill="#b8a898"/>
-          <!-- Waist detail -->
-          <path d="M48 130 Q90 140 132 130" stroke="#a09080" stroke-width="1.5" fill="none" opacity="0.6"/>
-        </svg>
-      </div>
-      <div class="product-info">
-        <div class="product-name">Ivory Wrap Dress</div>
-        <div class="product-detail">
-          <span>£ 540</span>
-          <button class="product-add" onclick="addToCart(this)">+</button>
-        </div>
-      </div>
+    <div class="service-card">
+      <div class="service-icon">🤸</div>
+      <div class="service-name">Functional Fitness</div>
+      <div class="service-desc">Kettlebells, battle ropes, sleds, and plyometric boxes to build real-world power and athleticism.</div>
+      <div class="service-bg-num">04</div>
     </div>
-
-    <div class="product-card">
-      <div class="product-bg pc-5"></div>
-      <div class="product-figure" style="height:70%">
-        <svg viewBox="0 0 180 300" fill="none" style="width:85%;height:100%">
-          <path d="M55 10 Q90 2 125 10 L130 50 Q108 58 90 58 Q72 58 50 50 Z" fill="#3a3430" opacity="0.9"/>
-          <path d="M50 50 Q52 150 50 280 L80 281 L82 160 L90 200 L98 160 L100 281 L130 280 Q128 150 130 50 Z" fill="#2d2926" opacity="0.95"/>
-          <rect x="52" y="130" width="76" height="5" fill="#b8975a" opacity="0.7"/>
-        </svg>
-      </div>
-      <div class="product-info">
-        <div class="product-name">Black Cigarette Trousers</div>
-        <div class="product-detail">
-          <span>£ 380</span>
-          <button class="product-add" onclick="addToCart(this)">+</button>
-        </div>
-      </div>
+    <div class="service-card">
+      <div class="service-icon">🧘</div>
+      <div class="service-name">Yoga & Recovery</div>
+      <div class="service-desc">Dedicated stretching and mobility zone. Recovery sessions and guided yoga to keep you moving pain-free.</div>
+      <div class="service-bg-num">05</div>
     </div>
-
-    <div class="product-card">
-      <div class="product-bg pc-6"></div>
-      <div class="product-figure" style="height:65%">
-        <svg viewBox="0 0 180 280" fill="none" style="width:85%;height:100%">
-          <!-- Bag -->
-          <rect x="30" y="80" width="120" height="140" rx="6" fill="#a08060" opacity="0.9"/>
-          <rect x="30" y="80" width="120" height="140" rx="6" fill="none" stroke="#8B6840" stroke-width="2"/>
-          <!-- Handle -->
-          <path d="M60 80 Q60 40 90 38 Q120 40 120 80" fill="none" stroke="#8B6840" stroke-width="5" stroke-linecap="round"/>
-          <!-- Clasp -->
-          <rect x="78" y="144" width="24" height="18" rx="3" fill="#b8975a"/>
-          <rect x="84" y="149" width="12" height="8" rx="2" fill="#a0804a"/>
-          <!-- Stitching -->
-          <rect x="38" y="88" width="104" height="124" rx="3" fill="none" stroke="#b89870" stroke-width="1" stroke-dasharray="4,3" opacity="0.5"/>
-        </svg>
-      </div>
-      <div class="product-info">
-        <div class="product-name">Structured Leather Tote</div>
-        <div class="product-detail">
-          <span>£ 1,050</span>
-          <button class="product-add" onclick="addToCart(this)">+</button>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- LOOKBOOK -->
-<section class="lookbook" id="lookbook">
-  <div class="lookbook-inner">
-    <div class="look-panel reveal">
-      <div class="look-bg lb-1"></div>
-      <div class="look-overlay">
-        <div class="look-num">01</div>
-        <div class="look-label">Evening Wear</div>
-        <div class="look-title">The Art<br>of Dressing</div>
-      </div>
-    </div>
-    <div class="look-panel reveal">
-      <div class="look-bg lb-2" style="opacity:0.3"></div>
-      <div class="look-center-content">
-        <div class="look-center-eyebrow">Lookbook SS 2025</div>
-        <h2 class="look-center-title">Clothes that<br><em>remember</em><br>who you are</h2>
-        <p class="look-center-body">Each piece in our spring collection is designed to live with you — to absorb your days and carry your story forward with grace.</p>
-        <a href="#" class="btn-outline-light"><span>View Full Lookbook</span></a>
-      </div>
-    </div>
-    <div class="look-panel reveal">
-      <div class="look-bg lb-3"></div>
-      <div class="look-overlay">
-        <div class="look-num">02</div>
-        <div class="look-label">Daywear</div>
-        <div class="look-title">Effortless<br>Precision</div>
-      </div>
+    <div class="service-card">
+      <div class="service-icon">🥗</div>
+      <div class="service-name">Nutrition Guidance</div>
+      <div class="service-desc">Diet consultation and meal planning support so your training gets the fuel it deserves — from our in-house advisors.</div>
+      <div class="service-bg-num">06</div>
     </div>
   </div>
 </section>
 
-<!-- CATEGORIES -->
-<section class="section categories-section" id="categories">
+<!-- MEMBERSHIP -->
+<section id="membership">
+  <div class="reveal">
+    <div class="section-eyebrow">Membership Plans</div>
+    <h2 class="section-title">Simple Pricing. <span style="color:var(--fire)">Serious Gains.</span></h2>
+    <p style="color:var(--muted); margin-top:0.8rem; max-width:500px; font-size:0.95rem; line-height:1.6;">
+      No hidden fees. Just show up, put in the work, and leave stronger than you came.
+    </p>
+  </div>
+  <div class="plans-grid reveal" style="transition-delay:0.1s">
+    <!-- Monthly -->
+    <div class="plan-card">
+      <div class="plan-name">Monthly</div>
+      <div class="plan-price">₹999 <span>/mo</span></div>
+      <div class="plan-period">Billed monthly · No lock-in</div>
+      <ul class="plan-features">
+        <li><span class="check">✓</span> Unlimited gym access</li>
+        <li><span class="check">✓</span> All equipment zones</li>
+        <li><span class="check">✓</span> Group classes</li>
+        <li class="off"><span class="cross">✗</span> Personal training sessions</li>
+        <li class="off"><span class="cross">✗</span> Nutrition consultation</li>
+      </ul>
+      <a href="tel:09171678861" class="plan-btn ghost">Get Started</a>
+    </div>
+
+    <!-- Quarterly — featured -->
+    <div class="plan-card featured">
+      <div class="plan-badge">Most Popular</div>
+      <div class="plan-name">Quarterly</div>
+      <div class="plan-price">₹2,499 <span>/3mo</span></div>
+      <div class="plan-period">Save ₹498 vs monthly</div>
+      <ul class="plan-features">
+        <li><span class="check">✓</span> Unlimited gym access</li>
+        <li><span class="check">✓</span> All equipment zones</li>
+        <li><span class="check">✓</span> Group classes</li>
+        <li><span class="check">✓</span> 2 PT sessions / month</li>
+        <li class="off"><span class="cross">✗</span> Nutrition consultation</li>
+      </ul>
+      <a href="tel:09171678861" class="plan-btn solid">Get Started</a>
+    </div>
+
+    <!-- Annual -->
+    <div class="plan-card">
+      <div class="plan-name">Annual</div>
+      <div class="plan-price">₹7,999 <span>/yr</span></div>
+      <div class="plan-period">Best value · Save over ₹4,000</div>
+      <ul class="plan-features">
+        <li><span class="check">✓</span> Unlimited gym access</li>
+        <li><span class="check">✓</span> All equipment zones</li>
+        <li><span class="check">✓</span> Group classes</li>
+        <li><span class="check">✓</span> 4 PT sessions / month</li>
+        <li><span class="check">✓</span> Nutrition consultation</li>
+      </ul>
+      <a href="tel:09171678861" class="plan-btn ghost">Get Started</a>
+    </div>
+  </div>
+  <p style="color:var(--muted); font-size:0.8rem; margin-top:1.5rem; text-align:center;">
+    * Prices are indicative. Call us at <a href="tel:09171678861" style="color:var(--fire); text-decoration:none;">091716 78861</a> for the latest rates and offers.
+  </p>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials" style="background:var(--dark)">
   <div class="section-header reveal">
-    <h2 class="section-title">Shop by Category</h2>
-    <a href="#" class="section-link">All Categories</a>
+    <div class="section-eyebrow">Member Stories</div>
+    <h2 class="section-title">Proof in the <span style="color:var(--fire)">Reps.</span></h2>
   </div>
-  <div class="cat-grid reveal">
-    <a href="#" class="cat-card">
-      <span class="cat-icon">🧥</span>
-      <span class="cat-name">Outerwear</span>
-      <span class="cat-count">42 pieces</span>
-      <span class="cat-arrow">↗</span>
-    </a>
-    <a href="#" class="cat-card">
-      <span class="cat-icon">👗</span>
-      <span class="cat-name">Dresses</span>
-      <span class="cat-count">67 pieces</span>
-      <span class="cat-arrow">↗</span>
-    </a>
-    <a href="#" class="cat-card">
-      <span class="cat-icon">👔</span>
-      <span class="cat-name">Tailoring</span>
-      <span class="cat-count">38 pieces</span>
-      <span class="cat-arrow">↗</span>
-    </a>
-    <a href="#" class="cat-card">
-      <span class="cat-icon">🧣</span>
-      <span class="cat-name">Knitwear</span>
-      <span class="cat-count">29 pieces</span>
-      <span class="cat-arrow">↗</span>
-    </a>
-    <a href="#" class="cat-card">
-      <span class="cat-icon">👜</span>
-      <span class="cat-name">Accessories</span>
-      <span class="cat-count">54 pieces</span>
-      <span class="cat-arrow">↗</span>
-    </a>
-    <a href="#" class="cat-card">
-      <span class="cat-icon">👠</span>
-      <span class="cat-name">Footwear</span>
-      <span class="cat-count">33 pieces</span>
-      <span class="cat-arrow">↗</span>
-    </a>
-  </div>
-</section>
-
-<!-- EDITORIAL -->
-<section class="editorial" id="editorial">
-  <div class="editorial-left reveal">
-    <div class="editorial-eyebrow">Our Philosophy</div>
-    <h2 class="editorial-headline">Craft over<br>everything</h2>
-    <p class="editorial-body">Founded in 2018, Maison Vell was built on a single belief: that true luxury is found in restraint. Each piece is cut from the finest sustainable materials, constructed by artisans in our London and Milan ateliers, and designed to outlast every trend that comes and goes.</p>
-    <a href="#" class="section-link" style="color:var(--charcoal)">Read Our Story</a>
-  </div>
-  <div class="editorial-right reveal">
-    <div class="editorial-img">
-      <div class="editorial-img-bg ei-1"></div>
+  <div class="reviews-grid reveal" style="transition-delay:0.1s">
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">"Best gym in Arumbakkam, hands down. The equipment is top-notch and the trainers actually know what they're doing. I've made more progress in 3 months here than in a year elsewhere."</p>
+      <div class="review-author">
+        <div class="avatar">R</div>
+        <div>
+          <div class="author-name">Rahul M.</div>
+          <div class="author-tag">Member since 2023</div>
+        </div>
+      </div>
     </div>
-    <div class="editorial-img">
-      <div class="editorial-img-bg ei-2"></div>
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">"I come here after work and the late closing time is a lifesaver. Clean, spacious, great vibe. The personal training sessions were worth every rupee."</p>
+      <div class="review-author">
+        <div class="avatar">P</div>
+        <div>
+          <div class="author-name">Priya S.</div>
+          <div class="author-tag">Member since 2022</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">"Max Rep changed my life. Lost 18 kg in 6 months with proper guidance from their trainers. The nutrition advice they gave me was a game-changer. Highly recommend."</p>
+      <div class="review-author">
+        <div class="avatar">A</div>
+        <div>
+          <div class="author-name">Arjun K.</div>
+          <div class="author-tag">Member since 2021</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- NEWSLETTER -->
-<section class="newsletter">
-  <div class="newsletter-eyebrow reveal">Join the Atelier</div>
-  <h2 class="newsletter-title reveal">First to know,<br>first to wear</h2>
-  <p class="newsletter-sub reveal">New collections, exclusive events, and pieces before they arrive.</p>
-  <div class="newsletter-form reveal">
-    <input type="email" class="newsletter-input" placeholder="Your email address">
-    <button class="newsletter-btn" onclick="subscribe()">Subscribe</button>
+<!-- VISIT / HOURS / CONTACT -->
+<section id="visit">
+  <!-- Hours -->
+  <div class="reveal">
+    <div class="section-eyebrow">Opening Hours</div>
+    <h2 class="section-title" style="margin-bottom:2rem">We're Open <span style="color:var(--fire)">Long.</span></h2>
+    <div class="info-card">
+      <div class="info-card-header">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--fire)">
+          <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+        </svg>
+        <h3>Hours of Operation</h3>
+      </div>
+      <div class="info-card-body">
+        <div class="open-badge">Open Now</div>
+        <div class="hours-row">
+          <span class="hours-day">Monday</span>
+          <span class="hours-time highlight">Open · Closes 11 PM</span>
+        </div>
+        <div class="hours-row">
+          <span class="hours-day">Tuesday</span>
+          <span class="hours-time highlight">Open · Closes 11 PM</span>
+        </div>
+        <div class="hours-row">
+          <span class="hours-day">Wednesday</span>
+          <span class="hours-time highlight">Open · Closes 11 PM</span>
+        </div>
+        <div class="hours-row">
+          <span class="hours-day">Thursday</span>
+          <span class="hours-time highlight">Open · Closes 11 PM</span>
+        </div>
+        <div class="hours-row">
+          <span class="hours-day">Friday</span>
+          <span class="hours-time highlight">Open · Closes 11 PM</span>
+        </div>
+        <div class="hours-row">
+          <span class="hours-day">Saturday</span>
+          <span class="hours-time highlight">Open · Closes 11 PM</span>
+        </div>
+        <div class="hours-row">
+          <span class="hours-day">Sunday</span>
+          <span class="hours-time highlight">Open · Closes 11 PM</span>
+        </div>
+      </div>
+    </div>
   </div>
+
+  <!-- Contact & Map -->
+  <div class="reveal" style="transition-delay:0.15s">
+    <div class="section-eyebrow">Find Us</div>
+    <h2 class="section-title" style="margin-bottom:2rem">Come <span style="color:var(--fire)">Train.</span></h2>
+    <div class="info-card">
+      <div class="info-card-header">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--fire)">
+          <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
+        </svg>
+        <h3>Location & Contact</h3>
+      </div>
+      <div class="info-card-body">
+        <div class="contact-item">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
+            </svg>
+          </div>
+          <div>
+            <div class="contact-label">Address</div>
+            <div class="contact-value">No 27, Poonamallee High Rd,<br>Dr. Radhakrishnan Nagar, Arumbakkam,<br>Chennai, Tamil Nadu 600106</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 16.92v3a2 2 0 01-2.18 2A19.79 19.79 0 013.08 5.18 2 2 0 015.1 3h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L9.09 10.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+            </svg>
+          </div>
+          <div>
+            <div class="contact-label">Phone</div>
+            <div class="contact-value"><a href="tel:09171678861">091716 78861</a></div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+            </svg>
+          </div>
+          <div>
+            <div class="contact-label">Hours</div>
+            <div class="contact-value">Open Daily · Closes 11 PM</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="map-embed">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3886.3927837628!2d80.20760617454905!3d13.071285712724538!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a5265dbde43afc5%3A0xa3c7f35f3aa5b0cd!2sMax%20Rep%20Fitness%20Centre!5e0!3m2!1sen!2sin!4v1710000000000!5m2!1sen!2sin"
+        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section id="cta">
+  <div class="section-eyebrow">Ready to Begin?</div>
+  <h2 class="section-title">Stop Waiting. Start <br>Lifting.</h2>
+  <p>Walk in any day, any time before 11 PM. Your first session could change everything.</p>
+  <a href="tel:09171678861" class="cta-btn">Call 091716 78861</a>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-top">
-    <div>
-      <div class="footer-brand">Maison Vell</div>
-      <p class="footer-tagline">Refined ready-to-wear for those who know exactly who they are. Made in London and Milan, worn everywhere.</p>
-    </div>
-    <div>
-      <div class="footer-col-title">Shop</div>
-      <ul class="footer-links">
-        <li><a href="#">New Arrivals</a></li>
-        <li><a href="#">Womenswear</a></li>
-        <li><a href="#">Menswear</a></li>
-        <li><a href="#">Accessories</a></li>
-        <li><a href="#">Sale</a></li>
-      </ul>
-    </div>
-    <div>
-      <div class="footer-col-title">Help</div>
-      <ul class="footer-links">
-        <li><a href="#">Size Guide</a></li>
-        <li><a href="#">Delivery</a></li>
-        <li><a href="#">Returns</a></li>
-        <li><a href="#">Contact</a></li>
-        <li><a href="#">FAQ</a></li>
-      </ul>
-    </div>
-    <div>
-      <div class="footer-col-title">Company</div>
-      <ul class="footer-links">
-        <li><a href="#">About Us</a></li>
-        <li><a href="#">Sustainability</a></li>
-        <li><a href="#">Careers</a></li>
-        <li><a href="#">Press</a></li>
-        <li><a href="#">Stockists</a></li>
-      </ul>
-    </div>
+  <div>
+    <div class="footer-logo">MAX<span>REP</span></div>
+    <div class="footer-tagline">No 27, Poonamallee High Rd, Arumbakkam, Chennai 600106. Open daily until 11 PM.</div>
   </div>
-  <div class="footer-bottom">
-    <span>© 2025 Maison Vell. All rights reserved.</span>
-    <div class="social-links">
-      <a href="#">Inst</a>
-      <a href="#">Pin</a>
-      <a href="#">TkTk</a>
-      <a href="#">YT</a>
-    </div>
-    <span>Privacy · Terms · Cookies</span>
+  <div class="footer-col">
+    <h4>Navigate</h4>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#membership">Membership</a></li>
+      <li><a href="#visit">Visit Us</a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <h4>Contact</h4>
+    <ul>
+      <li><a href="tel:09171678861">091716 78861</a></li>
+      <li><a href="#visit">Get Directions</a></li>
+      <li><a href="#visit">Hours</a></li>
+    </ul>
   </div>
 </footer>
+<div class="footer-bottom">
+  <span>© 2025 <span class="footer-fire">Max Rep Fitness Centre</span>. All rights reserved.</span>
+  <span>Arumbakkam, Chennai, Tamil Nadu</span>
+</div>
 
 <script>
-  // Custom cursor
-  const cursor = document.getElementById('cursor');
-  const ring = document.getElementById('cursorRing');
-  document.addEventListener('mousemove', e => {
-    cursor.style.left = e.clientX + 'px';
-    cursor.style.top = e.clientY + 'px';
-    setTimeout(() => {
-      ring.style.left = e.clientX + 'px';
-      ring.style.top = e.clientY + 'px';
-    }, 60);
-  });
-
-  // Nav scroll
-  const nav = document.getElementById('mainNav');
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 60);
-  });
-
-  // Scroll reveal
-  const reveals = document.querySelectorAll('.reveal');
+  // Intersection Observer for reveal animations
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => entry.target.classList.add('visible'), i * 80);
-        observer.unobserve(entry.target);
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
       }
     });
-  }, { threshold: 0.12 });
-  reveals.forEach(el => observer.observe(el));
+  }, { threshold: 0.1 });
 
-  // Cart
-  let cartCount = 2;
-  function addToCart(btn) {
-    cartCount++;
-    document.querySelector('.cart-count').textContent = cartCount;
-    btn.textContent = '✓';
-    btn.style.background = '#b8975a';
-    btn.style.color = 'white';
-    setTimeout(() => {
-      btn.textContent = '+';
-      btn.style.background = 'white';
-      btn.style.color = 'var(--charcoal)';
-    }, 1500);
-  }
-
-  // Newsletter
-  function subscribe() {
-    const input = document.querySelector('.newsletter-input');
-    const btn = document.querySelector('.newsletter-btn');
-    if (input.value.includes('@')) {
-      btn.textContent = 'Thank you ✓';
-      btn.style.background = '#3d3530';
-      btn.style.borderColor = '#3d3530';
-      btn.style.color = 'white';
-      input.value = '';
-    } else {
-      input.style.borderColor = '#A0522D';
-      setTimeout(() => input.style.borderColor = '', 1000);
-    }
-  }
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
 </body>
 </html>
